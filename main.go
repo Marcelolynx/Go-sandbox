@@ -1,25 +1,24 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"io/ioutil"
-	"net/http"
-	"os"
 )
 
+//exercicio ninja nível 1 - curso aprenda GO Youtube
+
+var a int = 2023
+var b string = "James Bond"
+var c bool = true
+
 func main() {
-	for _, url := range os.Args[1:] {
-		resp, err := http.Get(url)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
-			os.Exit(1)
-		}
-		b, err := ioutil.ReadAll(resp.Body)
-		resp.Body.Close()
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
-			os.Exit(1)
-		}
-		fmt.Printf("%s", b)
+	fmt.Println(Soma(9, 10))
+}
+
+func Soma(x int, y int) (int, error) {
+	IsAdult := x + y
+	if IsAdult < 18 {
+		return IsAdult, errors.New("não pode ser menor que 18")
 	}
+	return x + y, nil
 }
